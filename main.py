@@ -61,6 +61,8 @@ def editar_livro(id: int, livro_alterado: Livro):
 def incluir_novo(novo_livro: Livro):
     livros.append(novo_livro)
     return novo_livro
+
+
 @app.delete('/livros/{id}')
 def excluir_livro(id: int):
     for indice, livro in enumerate(livros):
