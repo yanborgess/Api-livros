@@ -1,24 +1,3 @@
-# from fastapi import FastAPI
-# from pydantic import BaseModel
-
-# class Inputs(BaseModel):
-#     inp: int
-#     inp2: str
-
-# app = FastAPI()
-
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
-
-# @app.get("/items/{item_id}")
-# async def read_item(item_id):
-#     return {"item_id": item_id}
-
-# @app.post('/exemplo_2')
-# def exemplo_2(inputs: Inputs) -> str:
-#     return inputs.inp2
-
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
@@ -62,7 +41,7 @@ def incluir_novo(novo_livro: Livro):
     livros.append(novo_livro)
     return novo_livro
 
-
+#Deletar
 @app.delete('/livros/{id}')
 def excluir_livro(id: int):
     for indice, livro in enumerate(livros):
