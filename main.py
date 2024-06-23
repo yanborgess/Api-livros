@@ -1,19 +1,9 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import FastAPI
 from typing import List
+from funcoes import *
+from livros import Livro
 
 app = FastAPI()
-
-class Livro(BaseModel):
-    id: int
-    título: str
-    autor: str
-
-livros = [
-    Livro(id=1, título='O Senhor dos Anéis - A Sociedade do Anel', autor='J.R.R Tolkien'),
-    Livro(id=2, título='Harry Potter e a Pedra Filosofal', autor='J.K Rowling'),
-    Livro(id=3, título='Hábitos Atômicos', autor='James Clear')
-]
 
 @app.get('/livros')
 def obter_livros():
@@ -21,31 +11,25 @@ def obter_livros():
 
 #ober livro
 @app.get('/livros/{id}')
-def obter_livros(id : int):
-    for livro in livros:
-        if livro.id ==id:
-            return livro
-    return {"erro": "Livro não encontrado"}
+def obter_livros_resquest(id):
+    livro_achado = obter_livros_id(id)
+    return livro_achado
+
 
 #editar 
 @app.put('/livros/{id}')
-def editar_livro(id: int, livro_alterado: Livro):
-    for indice, livro in enumerate(livros):
-        if livro.id == id:
-            livros[indice] = livro_alterado
-            return livros[indice]
+def editar_livro_resquest(id: int, livro_alterado: Livro):
+    editar_livro(id, livro_alterado)
 
 #criar 
 @app.post('/livros')
-def incluir_novo(novo_livro: Livro):
-    livros.append(novo_livro)
-    return novo_livro
+def incluir_novo_request(novo_livro: Livro):
+    incluir_novo_livro(novo_livro)
 
 #Deletar
 @app.delete('/livros/{id}')
 def excluir_livro(id: int):
-    for indice, livro in enumerate(livros):
-        if livro.id == id:
-            del livros[indice]
-            return {"message": "Livro excluído com sucesso"}
-    raise HTTPException(status_code=404, detail="Livro não encontrado")
+   deletar_livro(id)
+
+#ALTERA SOMENTE O NOME DO LIVRO 
+#DELETAR TODOS OS LIVROS 
