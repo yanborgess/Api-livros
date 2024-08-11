@@ -1,16 +1,20 @@
 from livros import *
 
-
-def obter_livros_id(id:int):
+def obter_livros_id(id: int) -> Livro:
     for livro in livros:
-        if livro.id ==id:
+        if livro.id == id:
             return livro
+# def obter_livros_id(id):
+#     for livro in livros:  
+#         print(livro.id)
+#         if livro.id ==id:
+#            print(id)
+#            return livro
         
 def editar_livro(id, livro_alterado: Livro):
     for indice, livro in enumerate(livros):
         if livro.id == id:
             livros[indice] = livro_alterado
-            print()
             return livros[indice]       
 
 def incluir_novo_livro(novo_livro:Livro):
