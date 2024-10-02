@@ -1,9 +1,11 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class Livro(BaseModel):
-    id: int
+    id: Optional[int]
     título: str
     autor: str
+
 
 livros = [
     Livro(id=1, título='O Senhor dos Anéis - A Sociedade do Anel', autor='J.R.R Tolkien'),
